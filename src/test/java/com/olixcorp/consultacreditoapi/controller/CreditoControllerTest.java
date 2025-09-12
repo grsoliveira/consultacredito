@@ -39,6 +39,17 @@ public class CreditoControllerTest {
 
   @Test
   @SneakyThrows
+  void testProcurarPorNumeroNFSE_notFound() {
+    RequestBuilder request = get(
+        "/api/v1/creditos/")
+        .contentType(APPLICATION_JSON);
+    mvc.perform(request)
+        .andDo(print())
+        .andExpect(status().is4xxClientError());
+  }
+
+  @Test
+  @SneakyThrows
   void testProcurarPorNumeroCredito() {
     RequestBuilder request = get(
         "/api/v1/creditos/credito/123456")
@@ -46,5 +57,16 @@ public class CreditoControllerTest {
     mvc.perform(request)
         .andDo(print())
         .andExpect(status().isOk());
+  }
+
+  @Test
+  @SneakyThrows
+  void testProcurarPorNumeroCredito_notFound() {
+    RequestBuilder request = get(
+        "/api/v1/creditos/credito/")
+        .contentType(APPLICATION_JSON);
+    mvc.perform(request)
+        .andDo(print())
+        .andExpect(status().is4xxClientError());
   }
 }
