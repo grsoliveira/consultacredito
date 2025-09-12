@@ -18,6 +18,10 @@ public class CreditoService {
   private final CreditoRepository creditoRepository;
 
   public CreditoSearchResponse procurarPorNumeroNFSE(String numeroNfse) {
+    if (numeroNfse == null || numeroNfse.trim().length() < 1) {
+      throw new IllegalArgumentException("Número da NFSe inválido");
+    }
+
     Optional<List<Credito>> dbResult = this.creditoRepository.findCreditoByNumeroNfse(numeroNfse);
     if (dbResult.isEmpty()) {
       throw new EntityNotFoundException("Nenhum crédito encontrado");
