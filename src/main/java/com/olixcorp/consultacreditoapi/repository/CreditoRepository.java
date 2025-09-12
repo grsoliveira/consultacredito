@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CreditoRepository extends JpaRepository<Credito, Long> {
   Optional<List<Credito>> findCreditoByNumeroNfse(String numeroNfse);
+
+  Optional<Credito> findCreditoByNumeroCredito(String numeroCredito);
 }

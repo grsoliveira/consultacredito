@@ -3,6 +3,7 @@ package com.olixcorp.consultacreditoapi.service;
 import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
 import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.repository.CreditoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -83,6 +84,39 @@ public class CreditoServiceTest {
     assertThrows(IllegalArgumentException.class, () -> {
       CreditoSearchResponse result = this.creditoService.procurarPorNumeroNFSE(null);
     });
+  }
 
+  @Test
+  public void procurarPorNumeroCredito_success() {
+    Credito c1 = Credito.builder()
+        .id(1L)
+        .numeroCredito("123")
+        .build();
+
+    when(creditoRepository.findCreditoByNumeroCredito(anyString())).thenReturn(Optional.of(c1));
+
+    Credito result = this.creditoService.procurarPorNumeroCredito("ABCD");
+    assertNotNull(result);
+    assertEquals("123", result.getNumeroCredito());
+  }
+
+  @Test
+  public void procurarPorNumeroCredito_error() {
+    when(creditoRepository.findCreditoByNumeroCredito(anyString())).thenReturn(Optional.empty());
+
+    assertThrows(EntityNotFoundException.class, () -> {
+      Credito result = this.creditoService.procurarPorNumeroCredito("ABCD");
+    });
+  }
+
+  @Test
+  public void procurarPorNumeroCredito_errorParameter() {
+    List<Credito> databaseResult = new ArrayList<>();
+
+    when(creditoRepository.findCreditoByNumeroNfse(anyString())).thenReturn(Optional.of(databaseResult));
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      this.creditoService.procurarPorNumeroCredito(null);
+    });
   }
 }

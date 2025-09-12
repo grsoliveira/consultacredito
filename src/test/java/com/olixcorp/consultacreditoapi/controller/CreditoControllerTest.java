@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import jakarta.transaction.Transactional;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,11 +27,21 @@ public class CreditoControllerTest {
   protected MockMvc mvc;
 
   @Test
-  @DisplayName("Test list medical questions.")
   @SneakyThrows
-  void testMedicalQuestionsSuccess() {
+  void testProcurarPorNumeroNFSE() {
     RequestBuilder request = get(
         "/api/v1/creditos/1232")
+        .contentType(APPLICATION_JSON);
+    mvc.perform(request)
+        .andDo(print())
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  @SneakyThrows
+  void testProcurarPorNumeroCredito() {
+    RequestBuilder request = get(
+        "/api/v1/creditos/credito/123456")
         .contentType(APPLICATION_JSON);
     mvc.perform(request)
         .andDo(print())

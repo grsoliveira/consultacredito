@@ -1,6 +1,7 @@
 package com.olixcorp.consultacreditoapi.controller;
 
 import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
+import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.service.CreditoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,12 @@ public class CreditoController {
   public CreditoSearchResponse procurarPorNumeroNFSE(@PathVariable String numeroNfse) {
     CreditoSearchResponse response = this.creditoService.procurarPorNumeroNFSE(numeroNfse);
     return response;
+  }
+
+  @GetMapping(value = "/credito/{numeroCredito}")
+  public Credito procurarPorNumeroCredito(@PathVariable String numeroCredito) {
+    Credito credito = this.creditoService.procurarPorNumeroCredito(numeroCredito);
+    return credito;
   }
 
 }
