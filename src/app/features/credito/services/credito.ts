@@ -16,4 +16,12 @@ export class CreditoService {
   listarCreditos(): Observable<Credito[]> {
     return this.http.get<Credito[]>(`${this.baseUrl}/creditos`);
   }
+
+  buscarPorNumeroCredito(numeroCredito: string): Observable<Credito | null> {
+    return this.http.get<Credito>(`${this.baseUrl}/creditos/credito/${numeroCredito}`);
+  }
+
+  buscarPorNumeroNfse(numeroNfse: string): Observable<Credito[]> {
+    return this.http.get<Credito[]>(`${this.baseUrl}/creditos/${numeroNfse}`);
+  }
 }
