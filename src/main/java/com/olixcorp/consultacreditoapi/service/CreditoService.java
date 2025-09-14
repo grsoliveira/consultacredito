@@ -53,4 +53,8 @@ public class CreditoService {
     }
     return dbResult.get();
   }
+
+  public List<Credito> listarTodos() {
+    return this.creditoRepository.findAll();
+  }
 }

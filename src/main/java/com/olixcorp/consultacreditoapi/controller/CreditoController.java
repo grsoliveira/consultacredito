@@ -1,5 +1,7 @@
 package com.olixcorp.consultacreditoapi.controller;
 
+import java.util.List;
+
 import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
 import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.service.CreditoService;
@@ -28,6 +30,12 @@ public class CreditoController {
   public ResponseEntity<Credito> procurarPorNumeroCredito(@PathVariable String numeroCredito) {
     Credito credito = this.creditoService.procurarPorNumeroCredito(numeroCredito);
     return ResponseEntity.ok(credito);
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Credito>> listarTodos() {
+    List<Credito> creditos = this.creditoService.listarTodos();
+    return ResponseEntity.ok(creditos);
   }
 
 }
