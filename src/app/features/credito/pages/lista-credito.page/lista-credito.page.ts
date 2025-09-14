@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {CreditoService} from '../../services/credito';
 import {Credito} from '../../models/credito.model';
 import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-lista-credito.page',
@@ -19,6 +19,7 @@ import {RouterLink} from '@angular/router';
 export class ListaCreditoPage implements OnInit {
   private creditoService = inject(CreditoService);
   creditos: Credito[] = [];
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.creditoService.listarCreditos().subscribe({
@@ -27,4 +28,8 @@ export class ListaCreditoPage implements OnInit {
     });
   }
 
+  verCredito(credito: Credito) {
+    console.log('Credito selecionado:', credito);
+    this.router.navigate(['/visualiza'], { state: { credito } });
+  }
 }

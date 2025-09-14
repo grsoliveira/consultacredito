@@ -33,9 +33,10 @@
         <td>{{ c.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</td>
         <td>{{ c.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</td>
         <td>
-          <a [routerLink]="['/visualiza', c.id]" class="btn btn-sm btn-primary">
+          <button class="btn btn-sm btn-primary"
+                  (click)="verCredito(c)">
             Ver
-          </a>
+          </button>
         </td>
       </tr>
       </tbody>

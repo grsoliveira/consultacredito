@@ -6,6 +6,6 @@ import {VisualizaCreditoPage} from './features/credito/pages/visualiza-credito.p
 export const routes: Routes = [
   { path: '', component: ListaCreditoPage },
   { path: 'busca', component: BuscaCreditoPage },
-  { path: 'visualiza/:id', component: VisualizaCreditoPage },
+  { path: 'visualiza', component: VisualizaCreditoPage },
   { path: '**', redirectTo: '' }
 ];
