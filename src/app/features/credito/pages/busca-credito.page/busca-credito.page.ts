@@ -3,6 +3,7 @@ import {CreditoService} from '../../services/credito.service';
 import {Credito} from '../../models/credito.model';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-busca-credito.page',
@@ -12,7 +13,7 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './busca-credito.page.css'
 })
 export class BuscaCreditoPage implements OnInit {
-
+  private router = inject(Router);
   private creditoService = inject(CreditoService);
 
   termoBusca: string = '';
@@ -20,13 +21,22 @@ export class BuscaCreditoPage implements OnInit {
   creditos: Credito[] = [];
 
   ngOnInit(): void {
-    this.resetBusca();
+    const state = history.state;
+    if (!state.keepData) {
+      this.resetBusca();
+    }
   }
 
   resetBusca() {
     this.termoBusca = '';
     this.tipoBusca = 'numeroCredito';
     this.creditos = [];
+  }
+
+  verCredito(credito: Credito) {
+    this.router.navigate(['/visualiza'], {
+      state: { credito, origem: 'busca' }
+    });
   }
 
   buscar() {

@@ -12,7 +12,7 @@
   <p><strong>Valor Dedução:</strong> {{ credito.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</p>
   <p><strong>Base Cálculo:</strong> {{ credito.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</p>
 
-  <a routerLink="/" class="btn btn-secondary mt-3">Voltar para Lista</a>
+  <button class="btn btn-secondary mt-3" (click)="voltar()">Voltar</button>
 </div>
 
 <div *ngIf="!credito" class="alert alert-warning mt-4">

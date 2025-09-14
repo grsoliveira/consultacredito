@@ -30,6 +30,8 @@ export class ListaCreditoPage implements OnInit {
 
   verCredito(credito: Credito) {
     console.log('Credito selecionado:', credito);
-    this.router.navigate(['/visualiza'], { state: { credito } });
+    this.router.navigate(['/visualiza'], {
+      state: { credito, origem: 'lista'}
+    });
   }
 }

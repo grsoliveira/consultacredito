@@ -12,8 +12,20 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class VisualizaCreditoPage {
   credito: Credito | undefined;
+  origem: 'lista' | 'busca' | undefined;
 
   constructor(private router: Router) {
     this.credito = history.state['credito'];
+    this.origem = history.state['origem'];
+  }
+
+  voltar() {
+    if (this.origem === 'busca') {
+      this.router.navigate(['/busca'], {
+        state: { keepData: true }
+      });
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

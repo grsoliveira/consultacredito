@@ -31,7 +31,6 @@
     <table class="table table-striped table-hover">
       <thead class="table-dark">
       <tr>
-        <th>ID</th>
         <th>Número Crédito</th>
         <th>Número NFS-e</th>
         <th>Data Constituição</th>
@@ -42,6 +41,7 @@
         <th>Valor Faturado</th>
         <th>Valor Dedução</th>
         <th>Base Cálculo</th>
+        <th>Ações</th>
       </tr>
       </thead>
       <tbody>
@@ -49,7 +49,6 @@
         <td colspan="11" class="text-center">Nenhum crédito encontrado</td>
       </tr>
       <tr *ngFor="let c of creditos">
-        <td>{{ c.id }}</td>
         <td>{{ c.numeroCredito }}</td>
         <td>{{ c.numeroNfse }}</td>
         <td>{{ c.dataConstituicao | date:'shortDate' }}</td>
@@ -60,6 +59,12 @@
         <td>{{ c.valorFaturado | currency:'BRL':'symbol':'1.2-2' }}</td>
         <td>{{ c.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</td>
         <td>{{ c.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary"
+                  (click)="verCredito(c)">
+            Ver
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
