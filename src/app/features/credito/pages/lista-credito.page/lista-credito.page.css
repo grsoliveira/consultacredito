@@ -1,0 +1,7 @@
+.table-responsive {
+  max-height: 70vh; // caso queira scroll vertical
+}
+
+h2 {
+  margin-bottom: 20px;
+}
