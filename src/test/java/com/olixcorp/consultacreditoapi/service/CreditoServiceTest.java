@@ -1,6 +1,16 @@
 package com.olixcorp.consultacreditoapi.service;
 
-import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchItemResponse;
 import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.repository.CreditoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -9,13 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public class CreditoServiceTest {
 
@@ -40,9 +43,9 @@ public class CreditoServiceTest {
 
     when(creditoRepository.findCreditoByNumeroNfse(anyString())).thenReturn(Optional.of(databaseResult));
 
-    CreditoSearchResponse result = this.creditoService.procurarPorNumeroNFSE("ABCD");
+    List<CreditoSearchItemResponse> result = this.creditoService.procurarPorNumeroNFSE("ABCD");
     assertNotNull(result);
-    assertEquals(1, result.getItems().size());
+    assertEquals(1, result.size());
   }
 
   @Test
@@ -59,9 +62,9 @@ public class CreditoServiceTest {
 
     when(creditoRepository.findCreditoByNumeroNfse(anyString())).thenReturn(Optional.of(databaseResult));
 
-    CreditoSearchResponse result = this.creditoService.procurarPorNumeroNFSE("ABCD");
+    List<CreditoSearchItemResponse> result = this.creditoService.procurarPorNumeroNFSE("ABCD");
     assertNotNull(result);
-    assertEquals(2, result.getItems().size());
+    assertEquals(2, result.size());
   }
 
   @Test
@@ -70,9 +73,9 @@ public class CreditoServiceTest {
 
     when(creditoRepository.findCreditoByNumeroNfse(anyString())).thenReturn(Optional.of(databaseResult));
 
-    CreditoSearchResponse result = this.creditoService.procurarPorNumeroNFSE("ABCD");
+    List<CreditoSearchItemResponse> result = this.creditoService.procurarPorNumeroNFSE("ABCD");
     assertNotNull(result);
-    assertEquals(0, result.getItems().size());
+    assertEquals(0, result.size());
   }
 
   @Test
@@ -82,7 +85,7 @@ public class CreditoServiceTest {
     when(creditoRepository.findCreditoByNumeroNfse(anyString())).thenReturn(Optional.of(databaseResult));
 
     assertThrows(IllegalArgumentException.class, () -> {
-      CreditoSearchResponse result = this.creditoService.procurarPorNumeroNFSE(null);
+      List<CreditoSearchItemResponse> result = this.creditoService.procurarPorNumeroNFSE(null);
     });
   }
 

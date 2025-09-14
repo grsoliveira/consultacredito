@@ -2,7 +2,7 @@ package com.olixcorp.consultacreditoapi.controller;
 
 import java.util.List;
 
-import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
+import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchItemResponse;
 import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.service.CreditoService;
 import lombok.AllArgsConstructor;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CreditoController {
   private CreditoService creditoService;
 
-  @GetMapping(value = "{numeroNfse}")
-  public ResponseEntity<CreditoSearchResponse> procurarPorNumeroNFSE(@PathVariable String numeroNfse) {
-    CreditoSearchResponse response = this.creditoService.procurarPorNumeroNFSE(numeroNfse);
+  @GetMapping(value = "/{numeroNfse}")
+  public ResponseEntity<List<CreditoSearchItemResponse>> procurarPorNumeroNFSE(@PathVariable String numeroNfse) {
+    List<CreditoSearchItemResponse> response = this.creditoService.procurarPorNumeroNFSE(numeroNfse);
     return ResponseEntity.ok(response);
   }
 

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchItemResponse;
-import com.olixcorp.consultacreditoapi.dto.response.CreditoSearchResponse;
 import com.olixcorp.consultacreditoapi.model.Credito;
 import com.olixcorp.consultacreditoapi.repository.CreditoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class CreditoService {
   private final CreditoRepository creditoRepository;
 
-  public CreditoSearchResponse procurarPorNumeroNFSE(String numeroNfse) {
+  public List<CreditoSearchItemResponse> procurarPorNumeroNFSE(String numeroNfse) {
     this.validarParametro(numeroNfse);
 
     Optional<List<Credito>> dbResult = this.creditoRepository.findCreditoByNumeroNfse(numeroNfse);
@@ -33,9 +32,7 @@ public class CreditoService {
         })
         .toList();
 
-    CreditoSearchResponse response = new CreditoSearchResponse();
-    response.setItems(items);
-    return response;
+    return items;
   }
 
   private void validarParametro(String parametro) {
