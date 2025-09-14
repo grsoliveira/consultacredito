@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {CreditoService} from '../../services/credito';
+import {CreditoService} from '../../services/credito.service';
 import {Credito} from '../../models/credito.model';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';

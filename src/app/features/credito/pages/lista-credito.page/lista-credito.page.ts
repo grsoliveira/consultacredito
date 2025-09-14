@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {CreditoService} from '../../services/credito';
+import {CreditoService} from '../../services/credito.service';
 import {Credito} from '../../models/credito.model';
 import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
