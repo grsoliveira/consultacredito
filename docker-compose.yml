@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  api:
+    build: ./consultacredito-api
+    container_name: api-container
+    ports:
+      - "8080:8080"
+
+  angular:
+    build: ./consultacredito-front
+    container_name: angular-container
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
