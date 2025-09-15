@@ -1,0 +1,27 @@
+# ConsultaCrédito API
+
+API Spring Boot para gerenciamento de créditos.
+
+---
+
+## Pré-requisitos
+
+- Java 17+
+- Maven 3.x
+- PostgreSQL rodando na máquina host (fora do Docker), banco: `consultacredito`
+- Docker e Docker Compose (opcional)
+
+> Observação: dentro do Docker, use `host.docker.internal` no Windows/Mac ou o IP da máquina no Linux para acessar o banco.
+
+---
+
+## Configuração do banco
+
+`application.properties`:
+
+```properties
+spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/consultacredito
+spring.datasource.username=postgres
+spring.datasource.password=pwd123
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database=postgresql
