@@ -1,0 +1,37 @@
+import {Component, inject, OnInit} from '@angular/core';
+import {CreditoService} from '../../services/credito.service';
+import {Credito} from '../../models/credito.model';
+import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
+import {Router, RouterLink} from '@angular/router';
+
+@Component({
+  selector: 'app-lista-credito.page',
+  standalone: true,
+  imports: [
+    DatePipe,
+    CurrencyPipe,
+    RouterLink,
+    CommonModule
+  ],
+  templateUrl: './lista-credito.page.html',
+  styleUrl: './lista-credito.page.css'
+})
+export class ListaCreditoPage implements OnInit {
+  private creditoService = inject(CreditoService);
+  creditos: Credito[] = [];
+  private router = inject(Router);
+
+  ngOnInit(): void {
+    this.creditoService.listarCreditos().subscribe({
+      next: (data) => this.creditos = data,
+      error: (err) => console.error('Erro ao listar créditos', err)
+    });
+  }
+
+  verCredito(credito: Credito) {
+    console.log('Credito selecionado:', credito);
+    this.router.navigate(['/visualiza'], {
+      state: { credito, origem: 'lista'}
+    });
+  }
+}

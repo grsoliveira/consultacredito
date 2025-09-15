@@ -1,0 +1,20 @@
+<div class="container mt-4" *ngIf="credito">
+  <h2>Visualizar Crédito</h2>
+  <p><strong>ID:</strong> {{ credito.id }}</p>
+  <p><strong>Número Crédito:</strong> {{ credito.numeroCredito }}</p>
+  <p><strong>Número NFS-e:</strong> {{ credito.numeroNfse }}</p>
+  <p><strong>Data Constituição:</strong> {{ credito.dataConstituicao | date:'shortDate' }}</p>
+  <p><strong>Valor ISSQN:</strong> {{ credito.valorIssqn | currency:'BRL':'symbol':'1.2-2' }}</p>
+  <p><strong>Tipo Crédito:</strong> {{ credito.tipoCredito }}</p>
+  <p><strong>Simples Nacional:</strong> {{ credito.simplesNacional ? 'Sim' : 'Não' }}</p>
+  <p><strong>Alíquota (%):</strong> {{ credito.aliquota }}</p>
+  <p><strong>Valor Faturado:</strong> {{ credito.valorFaturado | currency:'BRL':'symbol':'1.2-2' }}</p>
+  <p><strong>Valor Dedução:</strong> {{ credito.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</p>
+  <p><strong>Base Cálculo:</strong> {{ credito.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</p>
+
+  <button class="btn btn-secondary mt-3" (click)="voltar()">Voltar</button>
+</div>
+
+<div *ngIf="!credito" class="alert alert-warning mt-4">
+  Nenhum crédito selecionado.
+</div>

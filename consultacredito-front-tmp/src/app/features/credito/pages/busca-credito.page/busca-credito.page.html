@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <h2>Busca de Créditos</h2>
+
+  <div class="card p-3 mb-4">
+    <div class="row g-3 align-items-end">
+
+      <div class="col-md-6">
+        <label for="campoBusca" class="form-label">Pesquisar</label>
+        <input type="text" id="campoBusca" class="form-control" [(ngModel)]="termoBusca">
+      </div>
+
+      <div class="col-md-3">
+        <label for="tipoBusca" class="form-label">Buscar por</label>
+        <select id="tipoBusca" class="form-select" [(ngModel)]="tipoBusca">
+          <option value="numeroCredito">Número Crédito</option>
+          <option value="numeroNfse">Número NFS-e</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <button class="btn btn-primary w-100"
+                [disabled]="!termoBusca || !termoBusca.trim()"
+                (click)="buscar()">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+      <tr>
+        <th>Número Crédito</th>
+        <th>Número NFS-e</th>
+        <th>Data Constituição</th>
+        <th>Valor ISSQN</th>
+        <th>Tipo Crédito</th>
+        <th>Simples Nacional</th>
+        <th>Alíquota (%)</th>
+        <th>Valor Faturado</th>
+        <th>Valor Dedução</th>
+        <th>Base Cálculo</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="creditos.length === 0">
+        <td colspan="11" class="text-center">Nenhum crédito encontrado</td>
+      </tr>
+      <tr *ngFor="let c of creditos">
+        <td>{{ c.numeroCredito }}</td>
+        <td>{{ c.numeroNfse }}</td>
+        <td>{{ c.dataConstituicao | date:'shortDate' }}</td>
+        <td>{{ c.valorIssqn | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>{{ c.tipoCredito }}</td>
+        <td>{{ c.simplesNacional ? 'Sim' : 'Não' }}</td>
+        <td>{{ c.aliquota }}</td>
+        <td>{{ c.valorFaturado | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>{{ c.valorDeducao | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>{{ c.baseCalculo | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary"
+                  (click)="verCredito(c)">
+            Ver
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
